@@ -175,7 +175,7 @@ public class AdvCamera implements MethodChannel.MethodCallHandler,
             if (savePath != null) {
                 this.savePath = savePath.toString();
             } else {
-                this.savePath = Environment.getExternalStorageDirectory() + "/images";
+                this.savePath = getCacheDir() + "/images";
             }
 
             if (previewRatio != null) {
@@ -243,21 +243,9 @@ public class AdvCamera implements MethodChannel.MethodCallHandler,
         if (!folder.exists()) {
             folder.mkdirs();
             if (!folder.exists()) {
-                folder = new File(Environment.getExternalStorageDirectory() + "/images");
+                folder = new File(getCacheDir() + "/images");
                 if (!folder.exists()) {
                     folder.mkdirs();
-                    if (!folder.exists()) {
-                        folder = new File(Environment.getDataDirectory() + "/images");
-                        if (!folder.exists()) {
-                            folder.mkdirs();
-                            if (!folder.exists()) {
-                                folder = new File(context.getExternalFilesDir(null) + "/images");
-                                if (!folder.exists()) {
-                                    folder.mkdirs();
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
